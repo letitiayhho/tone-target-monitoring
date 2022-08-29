@@ -8,7 +8,7 @@ SEQ_LENS = [30, 36, 42]
 TONE_LEN = 0.3
 SUB_NUM = input("Input subject number: ")
 BLOCK_NUM = input("Input block number: ")
-WIN = visual.Window(size = (800, 600),
+WIN = visual.Window(size = (1920, 1080),
     screen = -1,
     units = "norm",
     fullscr = False,
