@@ -14,6 +14,7 @@ WIN = visual.Window(size = (1920, 1080),
     fullscr = False,
     pos = (0, 0),
     allowGUI = False)
+    
 
 KB = get_keyboard('Dell Dell USB Entry Keyboard')
 MARKER = EventMarker()
@@ -30,12 +31,26 @@ SEED = int(SUB_NUM + "0" + BLOCK_NUM + str(seq_num))
 print("Current seed: " + str(SEED))
 random.seed(SEED)
 
+
+
+#have subj listen to 3 pitches
 #display instructions if training block
-if BLOCK_NUM == "0":
+#welcome to block
+if BLOCK_NUM == "0": 
     SCORE_NEEDED = 3
+    hear_pitches(WIN, TONE_LEN, FREQS)
     instructions(WIN)
 else:
-    SCORE_NEEDED = 18
+    event.clearEvents(eventType = None)
+    blk_welcome = visual.TextStim(WIN, 
+                                  text = f"Welcome to block number {BLOCK_NUM}. Press 'space' to continue.",
+                                  pos=(0.0, 0.0),
+                                  color=(1, 1, 1), 
+                                  colorSpace='rgb' )
+    blk_welcome.draw()
+    WIN.flip()
+    event.waitKeys(keyList = ['space'])
+    SCORE_NEEDED =18
 
 
 # play sequences until SCORE_NEEDED is reached
