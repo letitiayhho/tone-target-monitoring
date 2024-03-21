@@ -8,7 +8,7 @@ from util.io.iter_BIDSPaths import *
 from util.io.bids import DataSink
 
 
-def main(force, subs, skips) -> None:
+def main(overwrite, subs, skips) -> None:
     BIDS_ROOT = '../data/bids'
     DERIV_ROOT = '../data/bids/derivatives/'
     layout = BIDSLayout(BIDS_ROOT, derivatives = False)
@@ -41,7 +41,7 @@ def main(force, subs, skips) -> None:
             extension = 'fif.gz'
         )
 
-        if os.path.isfile(micro_fpath) and not force:
+        if os.path.isfile(micro_fpath) and not overwrite:
             print(f"Subject {sub} run {run} is already preprocessed")
             continue
 
@@ -50,7 +50,7 @@ def main(force, subs, skips) -> None:
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Run preprocess.py over given subjects')
-    parser.add_argument('--force', 
+    parser.add_argument('--overwrite', 
                         type = bool, 
                         nargs = 1, 
                         help = 'run even if output files already exist', 
@@ -66,10 +66,10 @@ if __name__ == "__main__":
                         help = 'subjects NOT to preprocess (e.g. 1 9)', 
                         default = [])
     args = parser.parse_args()
-    force = args.force
+    overwrite = args.overwrite
     subs = args.subs
     skips = args.skips
-    print(f"force: {force}, subs: {subs}, skips : {skips}")
+    print(f"overwrite: {overwrite}, subs: {subs}, skips : {skips}")
     if bool(subs) & bool(skips):
         raise ValueError('Cannot specify both subs and skips')
-    main(force, subs, skips)
+    main(overwrite, subs, skips)
