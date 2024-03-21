@@ -1,0 +1,18 @@
+Reading /project2/hcn1/pitch_tracking_attention/analysis/../data/bids/derivatives/preprocessing/sub-7/sub-7_task-pitch_run-1_desc-clean_epo.fif.gz ...
+    Found the data of interest:
+        t =    -200.00 ...     350.00 ms
+        0 CTF compensation matrices available
+Reading /project2/hcn1/pitch_tracking_attention/analysis/../data/bids/derivatives/preprocessing/sub-7/sub-7_task-pitch_run-1_desc-clean_epo.fif-1.gz ...
+    Found the data of interest:
+        t =    -200.00 ...     350.00 ms
+        0 CTF compensation matrices available
+0 bad epochs dropped
+0 bad epochs dropped
+Not setting metadata
+3787 matching events found
+No baseline correction applied
+0 projection items activated
+Traceback (most recent call last):
+  File "/tmp/slurmd/job32809503/slurm_script", line 17, in <module>
+    if not epochs: # Handle first loop
+NameError: name 'epochs' is not defined

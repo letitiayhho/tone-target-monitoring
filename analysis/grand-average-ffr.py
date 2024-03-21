@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-#SBATCH --time=00:20:00
+#SBATCH --time=01:00:00
 #SBATCH --partition=broadwl
 #SBATCH --mem-per-cpu=56GB
 #SBATCH --output=logs/grand-average-ffr_%j.log
@@ -32,8 +32,8 @@ for file in files:
     for condition in conditions:
         print(f"Concatenating evokeds from condition {condition}")
         all_evokeds[condition].append(evokeds[condition][0])
-        break
-    break
+#         break
+#     break
 
 for condition in conditions:
     combined_evokeds = mne.combine_evoked(all_evokeds[condition], "equal")

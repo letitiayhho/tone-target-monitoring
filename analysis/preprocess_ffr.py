@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-#SBATCH --time=00:50:00 # 40 min enough for most
+#SBATCH --time=01:00:00 # 40 min enough for most
 #SBATCH --partition=bigmem2
 #SBATCH --ntasks=1
 #SBATCH --mem-per-cpu=120G # 96 enough for most
