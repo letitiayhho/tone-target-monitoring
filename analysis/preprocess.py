@@ -17,7 +17,7 @@ def main(sub, task, run) -> None:
     BIDS_ROOT = '../data/bids'
     DERIV_ROOT = '../data/bids/derivatives'
     LOWPASS = 300
-    FS = 5000
+    # FS = 5000
 
     # Import data
     print("---------- Import data ----------")

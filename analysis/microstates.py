@@ -45,7 +45,7 @@ def main(sub):
     run = lambda f: int(re.findall('run-(\w+)_', f)[0])
     fs = layout.get(
         return_type = 'filename',
-        subject = sub, desc = 'forMicrostate'
+        subject = sub, desc = 'forMicrostate2'
         )
     fs.sort(key = run)
     epochs_all = [mne.read_epochs(f) for f in fs]
@@ -85,7 +85,7 @@ def main(sub):
         subject = sub,
         task = TASK,
         desc = 'microstates',
-        suffix = 'ModKMeans',
+        suffix = 'ModKMeans2',
         extension = '.fif.gz'
     )
     ModK.save(solution_fpath)

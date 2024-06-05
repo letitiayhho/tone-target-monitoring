@@ -26,8 +26,8 @@ DERIV_ROOT = op.join(BIDS_ROOT, 'derivatives')
 FFR_PASSBAND = (100., 300.)
 MICROSTATE_PASSBAND = (1., 30.)
 TASK = 'pitch'
-TMIN = -0.3
-TMAX = 0.3
+TMIN = -0.25
+TMAX = 0.25
 
 def main(sub, run):
     '''
@@ -128,7 +128,7 @@ def main(sub, run):
         subject = sub,
         task = TASK,
         run = run,
-        desc = 'forFFR',
+        desc = 'forFFR2',
         suffix = 'epo',
         extension = 'fif.gz'
     )
@@ -180,7 +180,7 @@ def main(sub, run):
         subject = sub,
         task = TASK,
         run = run,
-        desc = 'forMicrostate',
+        desc = 'forMicrostate2',
         suffix = 'epo',
         extension = 'fif.gz'
     )

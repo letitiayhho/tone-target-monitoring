@@ -2,7 +2,7 @@
 
 #SBATCH --account=pi-hcn1
 #SBATCH --time=03:00:00 # 2 hrs enough for almost all
-#SBATCH --partition=bigmem
+#SBATCH --partition=bigmem2
 #SBATCH --ntasks=1
 #SBATCH --mem-per-cpu=300G # 300G enough for most
 #SBATCH --mail-type=all
@@ -35,7 +35,7 @@ DERIV_ROOT = op.join(BIDS_ROOT, 'derivatives')
 ERP_PASSBAND = (0.1, 40)
 TASK = 'pitch'
 TMIN = -0.3
-TMAX = 0.3
+TMAX = 0.5
 
 def main(sub, run):
     '''
@@ -138,8 +138,11 @@ def main(sub, run):
         fig_ica_removed = ica.plot_components(ica.exclude)
 
     # now we no longer need EOG channels
-    epochs = epochs.drop_channels('leog')
-    epochs = epochs.drop_channels('reog')
+    #epochs = epochs.drop_channels('leog')
+    #epochs = epochs.drop_channels('reog')
+ 
+    # Keep only midline channels
+    epochs = epochs.pick_channels(ch_names = ['Fz', 'FCz', 'Cz', 'CPz', 'Pz'])
 
     print('----------------- Baseline correct ------------------')
     epochs = epochs.apply_baseline((TMIN, 0.))
