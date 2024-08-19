@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 
-#SBATCH --time=01:00:00 # 40 min enough for most
+#SBATCH --time=00:40:00 # 40 min enough for most
 #SBATCH --partition=bigmem2
 #SBATCH --ntasks=1
-#SBATCH --mem-per-cpu=120G # 96 enough for most
+#SBATCH --mem-per-cpu=96GB # 96 enough for most
 #SBATCH --mail-type=all
 #SBATCH --mail-user=letitiayhho@uchicago.edu
 #SBATCH --output=logs/preprocess_ffr_%j.log
@@ -26,8 +26,8 @@ DERIV_ROOT = op.join(BIDS_ROOT, 'derivatives')
 FFR_PASSBAND = (100., 300.)
 MICROSTATE_PASSBAND = (1., 30.)
 TASK = 'pitch'
-TMIN = -0.25
-TMAX = 0.25
+TMIN = -0.2
+TMAX = 0.4
 
 def main(sub, run):
     '''
@@ -128,7 +128,7 @@ def main(sub, run):
         subject = sub,
         task = TASK,
         run = run,
-        desc = 'forFFR2',
+        desc = 'forFFR',
         suffix = 'epo',
         extension = 'fif.gz'
     )
@@ -180,7 +180,7 @@ def main(sub, run):
         subject = sub,
         task = TASK,
         run = run,
-        desc = 'forMicrostate2',
+        desc = 'forMicrostate',
         suffix = 'epo',
         extension = 'fif.gz'
     )

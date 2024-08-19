@@ -45,7 +45,7 @@ def main(overwrite, subs, skips) -> None:
             print(f"Subject {sub} run {run} is already preprocessed")
             continue
 
-        print("subprocess.check_call(\"sbatch ./preprocess.py %s %s\" % (sub,run), shell=True)")
+        print("subprocess.check_call(\"sbatch ./preprocess_ffr.py %s %s\" % (sub,run), shell=True)")
         subprocess.check_call("sbatch ./preprocess_ffr.py %s %s" % (sub, run), shell=True)
 
 if __name__ == "__main__":
