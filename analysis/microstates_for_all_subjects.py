@@ -10,8 +10,8 @@ from util.io.iter_BIDSPaths import *
 def main(overwrite, subs, skips) -> None:
     BIDS_ROOT = '../data/bids'
     DERIV_ROOT = '../data/bids/derivatives/'
-    layout = BIDSLayout(BIDS_ROOT, derivatives = True)
-    subs = layout.get_subjects()
+    #layout = BIDSLayout(BIDS_ROOT, derivatives = True)
+    #subs = layout.get_subjects()
     BADS = []
 
     for sub in subs:
@@ -39,7 +39,7 @@ def main(overwrite, subs, skips) -> None:
             print(f"Subject {sub} is already preprocessed")
             continue
 
-        print("subprocess.check_call(\"sbatch ./microstates.py %s\" % (sub), shell=True)")
+        print(f"subprocess.check_call(\"sbatch ./microstates.py %s\" % ({sub}), shell=True)")
         subprocess.check_call("sbatch ./microstates.py %s" % (sub), shell=True)
 
 if __name__ == "__main__":
