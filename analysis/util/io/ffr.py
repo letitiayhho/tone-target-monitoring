@@ -6,10 +6,11 @@ def compute_power_dB(evokeds):
     freqs = poststim.freqs
     return freqs, power
 
-def read_epochs(sub, desc):
+def read_epochs(BIDS_ROOT, sub, desc):
     '''
     reads and concatenates epochs across runs
     '''
+    from bids import BIDSLayout
     layout = BIDSLayout(BIDS_ROOT, derivatives = True)
     run = lambda f: int(re.findall('run-(\w+)_', f)[0])
     fnames = layout.get(

@@ -1,6 +1,6 @@
 from mne_bids import BIDSPath
 from mne_bids.config import BIDS_VERSION
-import os.path as op
+import os
 import json
 
 class DataSink():
@@ -15,9 +15,20 @@ class DataSink():
         derivatives_dir: string, path to main derivatives directory
         workflow: string, name of current workflow
         '''
-        self.deriv_root = op.join(derivatives_dir, workflow)
+        self.deriv_root = os.path.join(derivatives_dir, workflow)
         self.workflow = workflow
 
+    def make_dir(self, subject, **kwargs):
+        '''
+        Builds a directory to save a derivatives file in and
+        returns the filepath to save your data at (as string).
+        Currently assumes you're saving an EEG file.
+        '''
+        sub_dir = 'sub-' + subject
+        path = os.path.join(self.deriv_root, sub_dir)
+        os.makedirs(path, exist_ok = True)
+        return path
+        
     def get_path(self, subject, task, desc, suffix, extension, **kwargs):
         '''
         Builds a directory to save a derivatives file in and
@@ -43,7 +54,7 @@ class DataSink():
         Checks whether a dataset description file exists in the workflow
         directory, and makes one if not.
         '''
-        fpath = op.join(self.deriv_root, 'dataset_description.json')
+        fpath = os.path.join(self.deriv_root, 'dataset_description.json')
         try:
             f = open(fpath, "r")
             f.close()
