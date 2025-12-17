@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 
 #SBATCH --account=pi-hcn1
-#SBATCH --time=03:00:00 # 2 hrs enough for almost all
+#SBATCH --time=03:30:00 # 2 hrs enough for almost all
 #SBATCH --partition=bigmem2
 #SBATCH --ntasks=1
 #SBATCH --mem-per-cpu=300G # 300G enough for most
 #SBATCH --mail-type=all
-#SBATCH --mail-user=letitiayhho@uchicago.edu
+#SBATCH --mail-user=letitiayhho@rcc.uchicago.edu
 #SBATCH --output=logs/preprocess_erp-%j.log
 
 import numpy as np
@@ -34,7 +34,7 @@ BIDS_ROOT = '../data/bids'
 DERIV_ROOT = op.join(BIDS_ROOT, 'derivatives')
 ERP_PASSBAND = (0.1, 40)
 TASK = 'pitch'
-TMIN = -0.3
+TMIN = -0.2
 TMAX = 0.5
 
 def main(sub, run):
@@ -138,11 +138,11 @@ def main(sub, run):
         fig_ica_removed = ica.plot_components(ica.exclude)
 
     # now we no longer need EOG channels
-    #epochs = epochs.drop_channels('leog')
-    #epochs = epochs.drop_channels('reog')
+    epochs = epochs.drop_channels('leog')
+    epochs = epochs.drop_channels('reog')
  
     # Keep only midline channels
-    epochs = epochs.pick_channels(ch_names = ['Fz', 'FCz', 'Cz', 'CPz', 'Pz'])
+    # epochs = epochs.pick_channels(ch_names = ['Fz', 'FCz', 'Cz', 'CPz', 'Pz'])
 
     print('----------------- Baseline correct ------------------')
     epochs = epochs.apply_baseline((TMIN, 0.))
@@ -158,7 +158,7 @@ def main(sub, run):
         subject = sub,
         task = TASK,
         run = run,
-        desc = 'forERP',
+        desc = 'forERPall',
         suffix = 'epo',
         extension = 'fif.gz'
     )
@@ -183,7 +183,7 @@ def main(sub, run):
     report.add_html(html, title = 'Interpolated Channels', section = 'channels')
     report.add_html(epochs.info._repr_html_(), title = 'Epochs Info (FFR)', section = 'info')
     report.add_html(epochs.info._repr_html_(), title = 'Epochs Info (ERP)', section = 'info')
-    report.save(op.join(sink.deriv_root, 'sub-%s.html'%sub), overwrite = True)
+    report.save(op.join(sink.deriv_root, 'sub-%s-all.html'%sub), overwrite = True)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()

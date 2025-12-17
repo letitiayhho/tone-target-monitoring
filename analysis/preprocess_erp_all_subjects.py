@@ -36,7 +36,7 @@ def main(overwrite, subs, skips) -> None:
             subject = sub,
             task = task,
             run = run,
-            desc = 'forERP',
+            desc = 'forERPall',
             suffix = 'epo',
             extension = 'fif.gz'
         )
