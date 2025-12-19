@@ -1,4 +1,4 @@
-*.csv
+analysis/archive/*.csv
 *.eeg
 *.vhdr
 *.vmrk
