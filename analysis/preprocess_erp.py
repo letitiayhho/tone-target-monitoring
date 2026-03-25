@@ -90,6 +90,7 @@ def main(sub, run):
         random_state = int(sub)
         )
     prep.fit()
+    print(prep.
 
     print('----------------- Extract data from PREP ------------------')
     prep_eeg = prep.raw_eeg # get EEG channels from PREP
